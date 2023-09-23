@@ -1,16 +1,14 @@
 {
-  "short_name": "Your Extension Name",
-  "name": "Your Extension Name",
-  "icons": {
-    "16": "favicon.ico",
-    "48": "logo192.png",
-   "128": "logo512.png"
+  "name": "Signwave",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
   },
-  "permissions": [],
-  "manifest_version": 2,
-  "version": "0.0.1",
-  "browser_action": {
-    "default_popup": "index.html",
-    "default_title": "Your Extension Name"
+  "commands": {
+    "inject-script": {
+      "suggested_key": "Ctrl+Shift+S",
+      "description": "Inject a script on the page"
+    }
   }
 }
