@@ -10,5 +10,10 @@
       "suggested_key": "Ctrl+Shift+S",
       "description": "Inject a script on the page"
     }
+  },
+  "permissions": ["storage", "declarativeContent", "activeTab", "scripting"],
+  "action": {
+    "default_popup": "index.html",
+    "default_position": "center"
   }
 }
