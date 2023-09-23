@@ -1,9 +1,10 @@
 // background.js
 let isInputFieldVisible = false;
+
 chrome.runtime.onInstalled.addListener(() => {
   chrome.action.setPopup({
-  popup: "index.html",
-  position: browser.action.Position.CENTER
+    popup: "index.html",
+    position: chrome.action.Position.CENTER
   });
 })
 
@@ -18,30 +19,32 @@ chrome.commands.onCommand.addListener((command) => {
       chrome.scripting.executeScript({
         target: { tabId: activeTab.id },
         function: () => {
-        
           const body = document.getElementById('maestro-portal');
           const currentFilter = body.style.filter;
+          const inputField = document.getElementById('yourInputFieldId');
+
           if (currentFilter.includes('blur')) {
             // Remove the blur filter
             body.style.filter = '';
+            if (inputField) {
+              inputField.style.display = 'none';
+            }
           } else {
             // Apply the blur filter
-            const inputField = document.getElementById('yourInputFieldId');
-
             if (!inputField) {
               // If it doesn't exist, create one and append it to the body
               const newInputField = document.createElement('span');
               newInputField.id = 'yourInputFieldId';
-              newInputField.placeholder = 'Ask AI ';
-              newInputField.role= 'textbox';
-              newInputField.contentEditable='true';
-              newInputField.spellcheck='false';
+              newInputField.placeholder = 'Ask AI';
+              newInputField.role = 'textbox';
+              newInputField.contentEditable = 'true';
+              newInputField.spellcheck = 'false';
+              newInputField.style.outline = 'none';
               // Apply CSS styles to position it absolutely at the top center
               newInputField.style.position = 'absolute';
               newInputField.style.top = '40%';
               newInputField.style.left = '50%';
               newInputField.style.border = 'none';
-              
               newInputField.style.transform = 'translateX(-50%)';
               // Apply additional CSS styles
               newInputField.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.3)';
@@ -51,27 +54,30 @@ chrome.commands.onCommand.addListener((command) => {
               newInputField.style.backgroundColor = 'rgba(211, 211, 211, 0.1)';
               newInputField.style.borderRadius = '10px';
               newInputField.style.fontSize = 'x-large';
-              newInputField.style.zIndex='100';
-              
-              document.body.appendChild(newInputField);
-              
-            }
-            body.style.filter = 'blur(10px)';
-          }
-        },
-      });
+              newInputField.style.zIndex = '100';
 
-      
-      // Toggle input field visibility
-      chrome.scripting.executeScript({
-        target: { tabId: activeTab.id },
-        function: (isInputFieldVisible) => {
-          const inputField = document.getElementById('yourInputFieldId'); // Replace with the actual ID of your input field
-          if (inputField) {
-            inputField.style.display = isInputFieldVisible ? 'none' : 'block';
+              document.body.appendChild(newInputField);
+
+              newInputField.addEventListener("focus", function () {
+                if (newInputField.textContent === 'Ask AI') {
+                  newInputField.textContent = '';
+                  newInputField.style.color = 'black';
+                }
+              });
+
+              newInputField.addEventListener("blur", function () {
+                if (newInputField.textContent === '') {
+                  newInputField.textContent = 'Ask AI';
+                  newInputField.style.color = 'rgba(0, 0, 0, 0.5)';
+                }
+              });
+            }
+
+            body.style.filter = 'blur(10px)';
+            inputField.style.display = 'block';
+            inputField.focus();
           }
         },
-        args: [isInputFieldVisible],
       });
 
       isInputFieldVisible = !isInputFieldVisible;
