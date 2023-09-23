@@ -30,10 +30,12 @@ chrome.commands.onCommand.addListener((command) => {
 
             if (!inputField) {
               // If it doesn't exist, create one and append it to the body
-              const newInputField = document.createElement('input');
+              const newInputField = document.createElement('span');
               newInputField.id = 'yourInputFieldId';
               newInputField.placeholder = 'Ask AI ';
-              
+              newInputField.role= 'textbox';
+              newInputField.contentEditable='true';
+              newInputField.spellcheck='false';
               // Apply CSS styles to position it absolutely at the top center
               newInputField.style.position = 'absolute';
               newInputField.style.top = '40%';
