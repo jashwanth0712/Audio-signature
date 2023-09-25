@@ -1,0 +1,19 @@
+{
+  "name": "Signwave",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "inject-script": {
+      "suggested_key": "Ctrl+Shift+S",
+      "description": "Inject a script on the page"
+    }
+  },
+  "permissions": ["storage", "declarativeContent", "activeTab", "scripting"],
+  "action": {
+    "default_popup": "index.html",
+    "default_position": "center"
+  }
+}
