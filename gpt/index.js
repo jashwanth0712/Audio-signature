@@ -1,25 +1,25 @@
 const express = require("express");
 require("dotenv").config();
-const { Configuration, OpenAIApi } = require("openai");
+const {  OpenAI } = require("openai");
 
 const app = express();
 
 app.use(express.json());
 
-const configuration = new Configuration({
-  apiKey: process.env.OPEN_AI_KEY,
-});
-const openai = new OpenAIApi(configuration);
+const openai = new OpenAI({
+  apiKey: "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"// This is also the default, can be omitted
+});;
 
 app.post("/find-complexity", async (req, res) => {
   try {
     const { prompt } = req.body;
+    console.log(prompt)
     const response = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `
               ${prompt}
       
-              The time complexity of this function is
+              how are you
               ###
             `,
       max_tokens: 64,
