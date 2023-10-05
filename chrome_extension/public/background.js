@@ -39,7 +39,7 @@ chrome.commands.onCommand.addListener((command) => {
 
               // Set the source URL of the image
               // img.src = 'https://i.pinimg.com/236x/53/2a/00/532a008c33c23137ed796b9e3d01459b.jpg';
-              img.src = '../assets/listening.gif';
+              img.src = 'https://raw.githubusercontent.com/jashwanth0712/Audio-signature/main/chrome_extension/assets/listening.gif';
               
               // Apply CSS styles to the image
               img.style.borderRadius = '50%';
