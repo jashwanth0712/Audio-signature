@@ -22,15 +22,36 @@ chrome.commands.onCommand.addListener((command) => {
           const body = document.getElementById('root');
           const currentFilter = body.style.filter;
           const inputField = document.getElementById('yourInputFieldId');
-
+          const listeningAnimation=document.getElementById('listening-animation');
           if (currentFilter.includes('blur')) {
             // Remove the blur filter
             body.style.filter = '';
             if (inputField) {
               inputField.style.display = 'none';
             }
+            if(listeningAnimation){
+              listeningAnimation.style.display = 'none';
+            }
           } else {
             // Apply the blur filter
+            if (!listeningAnimation) {
+              var img = document.createElement('img');
+
+              // Set the source URL of the image
+              // img.src = 'https://i.pinimg.com/236x/53/2a/00/532a008c33c23137ed796b9e3d01459b.jpg';
+              img.src = '../assets/listening.gif';
+              
+              // Apply CSS styles to the image
+              img.style.borderRadius = '50%';
+              img.style.position = 'absolute';
+              img.style.top = '10%';
+              img.style.left = '45%';
+              img.style.boxShadow = 'rgba(0, 0, 0, 0.3) 0px 8px 30px';
+              img.style.width = '180px';
+              img.id="listening-animation";
+              document.body.appendChild(img);
+
+            }
             if (!inputField) {
               // If it doesn't exist, create one and append it to the body
               const newInputField = document.createElement('span');
@@ -74,6 +95,7 @@ chrome.commands.onCommand.addListener((command) => {
             }
 
             body.style.filter = 'blur(10px)';
+            listeningAnimation.style.display='block';
             inputField.style.display = 'block';
             inputField.focus();
           }
