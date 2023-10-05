@@ -19,7 +19,7 @@ chrome.commands.onCommand.addListener((command) => {
       chrome.scripting.executeScript({
         target: { tabId: activeTab.id },
         function: () => {
-          const body = document.getElementById('maestro-portal');
+          const body = document.getElementById('root');
           const currentFilter = body.style.filter;
           const inputField = document.getElementById('yourInputFieldId');
 
