@@ -1,16 +1,10 @@
 // background.js
+// import SpeechRecognition, { useSpeechRecognition } from "../node_modules/react-speech-recognition/lib/index.js";
 let isInputFieldVisible = false;
 
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.action.setPopup({
-    popup: "index.html",
-    position: chrome.action.Position.CENTER
-  });
-})
 
 chrome.commands.onCommand.addListener((command) => {
   console.log(`Command "${command}" triggered`);
-
   // Get the active tab
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const activeTab = tabs[0];
