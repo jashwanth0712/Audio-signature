@@ -1,9 +1,19 @@
-// inputField.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
-import sendIcon from "../assets/icons/arrow.png"
+import sendIcon from "../assets/icons/arrow.png";
+import SpeechRecognition  from "react-speech-recognition";
+import { useSpeechRecognition } from "react-speech-recognition";
+
 export default function InputField() {
   const [inputValue, setInputValue] = useState(""); // State to track input value
+  const { transcript,listening, resetTranscript } = useSpeechRecognition(); // Get transcript from SpeechRecognition
+    useEffect(()=>{
+        SpeechRecognition.startListening({ continuous: true });
+    },[])
+  useEffect(() => {
+    // Update input value when transcript changes
+    setInputValue(transcript);
+  }, [transcript]);
 
   // Function to handle input value change
   const handleInputChange = (e) => {
@@ -15,6 +25,7 @@ export default function InputField() {
     e.preventDefault();
     // Perform your submit action here with the inputValue
     console.log("Submitted: " + inputValue);
+    resetTranscript(); // Reset transcript after submission
   };
 
   // Calculate the number of rows based on the number of newline characters
@@ -37,8 +48,31 @@ export default function InputField() {
         }}
       />
       <button type="submit" className="submit-button">
-        <img src={sendIcon}  />
+        <img src={sendIcon} alt="Send" />
       </button>
+      <div>
+       
+        <button
+          onClick={() => {
+            if(listening){
+                SpeechRecognition.stopListening();
+            }
+            else{
+        SpeechRecognition.startListening({ continuous: true });
+            }
+          }}
+        >
+          {listening?'mute':'unmute'}
+        </button>
+        <button
+          onClick={() => {
+            resetTranscript();
+          }}
+        >
+          Reset
+        </button>
+        <p>{transcript}</p>
+      </div>
     </form>
   );
 }
