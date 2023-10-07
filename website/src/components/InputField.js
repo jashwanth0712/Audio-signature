@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import sendIcon from "../assets/icons/arrow.png";
+import mute from "../assets/icons/mute.png";
+import Unmute from "../assets/icons/unmute.png";
+import Reset from "../assets/icons/reset.png";
 import SpeechRecognition  from "react-speech-recognition";
 import { useSpeechRecognition } from "react-speech-recognition";
 
@@ -18,6 +21,7 @@ export default function InputField() {
   // Function to handle input value change
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
+    
   };
 
   // Function to handle form submission
@@ -34,6 +38,7 @@ export default function InputField() {
   };
 
   return (
+    <div className="prompt-form">
     <form onSubmit={handleSubmit}>
       <textarea
         className="inputfield"
@@ -52,27 +57,35 @@ export default function InputField() {
       </button>
       <div>
        
-        <button
-          onClick={() => {
-            if(listening){
-                SpeechRecognition.stopListening();
-            }
-            else{
-        SpeechRecognition.startListening({ continuous: true });
-            }
-          }}
-        >
-          {listening?'mute':'unmute'}
-        </button>
-        <button
-          onClick={() => {
-            resetTranscript();
-          }}
-        >
-          Reset
-        </button>
-        <p>{transcript}</p>
+       
       </div>
     </form>
+     <button
+     className="submit-button"
+       onClick={() => {
+         if(listening){
+             SpeechRecognition.stopListening();
+         }
+         else{
+     SpeechRecognition.startListening({ continuous: true });
+         }
+       }}
+     >
+       {listening
+       ?
+       <img src={mute} alt="mute" />
+       :
+       <img src={Unmute} alt="unmute" />
+       }
+     </button>
+     <button
+     className="submit-button"
+       onClick={() => {
+         resetTranscript();
+       }}
+     >
+       <img src={Reset} alt="Reset" />
+     </button>
+     </div>
   );
 }
