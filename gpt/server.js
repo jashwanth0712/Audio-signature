@@ -33,6 +33,10 @@ const openai = new OpenAI({
       res.status(500).json({ error: "An error occurred" });
     }
   });
+
+  app.get("/", (req, res) => {
+    res.send("Hi i am working");
+  });
   
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
