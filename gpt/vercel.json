@@ -1,17 +1,14 @@
 {
-    "version":2,
-    "framework":"node",
-    "name":"prompting",
-    "builds":[
+    "builds": [
         {
-            "src":"server.js",
-            "use":"@vercel/node"
+            "src": "server.js",
+            "use": "@vercel/node"
         }
     ],
-    "routers":[
+    "routes": [
         {
-            "src":"/(.*)",
-            "dest":"server.js"
+          "src": "/(.*)",
+          "dest": "server.js"
         }
     ]
-}
+  }
