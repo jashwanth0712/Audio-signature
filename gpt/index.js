@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 const openai = new OpenAI({
-  apiKey: "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"// This is also the default, can be omitted
+  apiKey: process.env.OPENAI_API_KEY// This is also the default, can be omitted
 });;
 
 app.post("/find-complexity", async (req, res) => {

@@ -10,7 +10,7 @@ const openai = new OpenAI({
     try {
         const completion = await openai.completions.create({
             model: 'gpt-3.5-turbo-instruct',
-            prompt: 'Write a tagline for an ice cream shop.'
+            prompt: 'Write a poem on rabindranath tagore ,include his achievements his beliefs and his contributio towards indian something movement '
         });
   
       console.log(completion);
