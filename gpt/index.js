@@ -35,14 +35,22 @@ const openai = new OpenAI({
   });
 // List of tags
 const tags = ["tag1", "tag2", "tag3", "tag4", "tag5", "tag6"];
+
 app.post("/", (req, res) => {
   // Generate a random index to select a random tag from the list
   const randomIndex = Math.floor(Math.random() * tags.length);
   const randomTag = tags[randomIndex];
 
-  // Send the random tag as the response
-  res.send(randomTag);
+  // Create a response object with the random tag and emails array
+  const response = {
+    tag: randomTag,
+    emails: ["j@gmail.com", "c@gmail.com"]
+  };
+
+  // Send the response as JSON
+  res.json(response);
 });
+
   app.get("/", (req, res) => {
     res.send("Hi i am working");
   });
