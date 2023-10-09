@@ -1,0 +1,39 @@
+input="i want to get list of all people who have signed" 
+
+prompt="a person works for a company and he wants to automate his tasks ,so he gives a text to the model where the model understands the text
+ and perfom the tasks as indicated but the input text given by the user may not always be the same sentence so understand the context of the sentence and generate the output as specified below
+
+ you have to return based on the examples and rules defined below
+
+ examples="'
+ example1 for tag 1:'i want to get list of all people who have not signed'
+ output1:'tag 1'
+
+ example2 for tag 1:'i have sent documents to people to sign and i want to know who all have not signed it'
+ output2:'tag 1'
+
+ example3 for tag 1:'it has been past the due date but i did not recieve all the papers back after getting them signed by people can i know who all did not sign the documents'
+ output3:'tag 1'
+
+ example1 for tag 2:'i want to send request to a person to send the document back'
+ uotput1:'tag 2'
+
+ example2 for tag 2:'i want to send a request to a person requesting him to sign the document as the deadline is approaching'
+ output2:'tag 2'
+
+ example3 for tag 2:'a person did not get the document send a request to him asking him to authorise his key'
+ output3:'tag 2'
+
+ example1 fot tag 3:'send signature requests to multiple persons at a time'
+ output1:'tag 3'
+
+ example2 for tag 3:'there are multiple persons who did not sign the document send request asking them to sign the document'
+ output2:'tag 3'
+
+ and also remember that if the sentence falls in neither of the category thrn return tag 4"'
+
+rules="here are some rules to be followed 
+1.identify related sentences to the examples above and return tags
+2.if the emotion of the statement is angry then return tag 5"
+
+your task is to see the input statement and return the tag only in JSON format return only the tag .do not return any other information before and after the tag"
