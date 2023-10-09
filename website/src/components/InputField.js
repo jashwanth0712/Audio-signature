@@ -112,16 +112,21 @@ export default function InputField() {
           <img src={Reset} alt="Reset" />
         </button>
       </div>
-      <div class="pulse-container">
-        <div class="pulse-element"></div>
-      </div>
+      <div class="output-container">
       {
-        isLoading?<div class="pulse-container">
+        isLoading?
+        <div class="pulse-container">
+        <div class="pulse-element" style={{width:"50px"}}></div>
         <div class="pulse-element"></div>
+        <div class="pulse-element" style={{width:"50%"}}></div>
+        <div class="pulse-element" style={{width:"70%"}}></div>
+        <div class="pulse-element" ></div>
       </div>:
       <Output {...(sampleProps || {})} />
       }
 
+      </div>
+      
     </div>
   );
 }

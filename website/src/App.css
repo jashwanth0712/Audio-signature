@@ -95,12 +95,13 @@
 .pulse-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: start;
+  justify-content: start;
 }
 
 .pulse-element {
-  width: 510px;
+  width: 80%;
+  margin-top:5px ;
   height: 10px;
   background-color: #ccc;
   border-radius: 4px;
@@ -120,4 +121,11 @@
     transform: scale(0.98);
     opacity: 0.5;
   }
+}
+.output-container{
+  justify-content: flex-start;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 30px;
+  border-radius: 10px;
+  height: auto;
+  padding: 5px;
 }
