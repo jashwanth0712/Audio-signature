@@ -36,15 +36,18 @@ app.use(cors());
   });
 // List of tags
 const tags = ["tag1", "tag2", "tag3", "tag4", "tag5", "tag6"];
+const Inputs = ["email","emails","name","names","phone","phones"];
 
 app.post("/", (req, res) => {
   // Generate a random index to select a random tag from the list
   const randomIndex = Math.floor(Math.random() * tags.length);
   const randomTag = tags[randomIndex];
-
+  const randominputIndex = Math.floor(Math.random() * tags.length);
+  const randomInput=Inputs[randominputIndex]
   // Create a response object with the random tag and emails array
   const response = {
     tag: randomTag,
+    input:randominputIndex,
     emails: ["j@gmail.com", "c@gmail.com"]
   };
 
