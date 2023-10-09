@@ -29,20 +29,34 @@ export default function InputField() {
   };
 
   // Function to handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Perform your submit action here with the inputValue
-    console.log("Submitted: " + inputValue);
 
-    // Set the sampleProps here
-    setSampleProps({
-      Tag: '1',
-      prop2: 42,
-      Emails: ['jashwanth@gmail.com', 'jack@gmail.com', 'Cs20b1007@iiitdm.ac.in'],
-    });
+    try {
+      // Create a POST request with the prompt in the body
+      const response = await fetch("https://audio-signature-backend.vercel.app", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt: inputValue }),
+      });
 
-    resetTranscript(); // Reset transcript after submission
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      // Parse the response JSON and set it to sampleProps
+      const result = await response.json();
+      setSampleProps(result);
+      
+      // Reset transcript after submission
+      resetTranscript();
+    } catch (error) {
+      console.error("Error sending POST request:", error);
+    }
   };
+
 
   // Calculate the number of rows based on the number of newline characters
   const calculateRowCount = () => {
