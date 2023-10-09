@@ -47,7 +47,7 @@ app.post("/", (req, res) => {
   // Create a response object with the random tag and emails array
   const response = {
     tag: randomTag,
-    input:randominputIndex,
+    input:randomInput,
     emails: ["j@gmail.com", "c@gmail.com"]
   };
 
