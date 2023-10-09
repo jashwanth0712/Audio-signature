@@ -15,8 +15,8 @@ const openai = new OpenAI({
     try {
       var prompt = req.body.prompt; // You can pass the prompt as a JSON object in the request body
       console.log(prompt);
-    
-    prompt=prompt+"' return y if emotion  prompt is angry or else return n";
+     const rules="ih hrllo gm"
+     prompt=prompt+rules
 
     if (!prompt) {
         return res.status(400).json({ error: "Prompt is required" });
