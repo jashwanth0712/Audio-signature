@@ -10,6 +10,7 @@ import Output from "./output";
 
 export default function InputField() {
   const [inputValue, setInputValue] = useState(""); // State to track input value
+  const [isLoading,setIsLoading]=useState(false);
   const [sampleProps, setSampleProps] = useState(null); // State to hold sampleProps
 
   const { transcript, listening, resetTranscript } = useSpeechRecognition(); // Get transcript from SpeechRecognition
@@ -31,7 +32,7 @@ export default function InputField() {
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true)
     try {
       // Create a POST request with the prompt in the body
       const response = await fetch("https://audio-signature-backend.vercel.app", {
@@ -48,6 +49,7 @@ export default function InputField() {
 
       // Parse the response JSON and set it to sampleProps
       const result = await response.json();
+      setIsLoading(false)
       setSampleProps(result);
       
       // Reset transcript after submission
@@ -110,7 +112,16 @@ export default function InputField() {
           <img src={Reset} alt="Reset" />
         </button>
       </div>
+      <div class="pulse-container">
+        <div class="pulse-element"></div>
+      </div>
+      {
+        isLoading?<div class="pulse-container">
+        <div class="pulse-element"></div>
+      </div>:
       <Output {...(sampleProps || {})} />
+      }
+
     </div>
   );
 }
