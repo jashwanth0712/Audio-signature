@@ -11,7 +11,7 @@ const openai = new OpenAI({
 
   app.use(express.json());
 
-  app.post("/", async (req, res) => {
+  app.post("/temp", async (req, res) => {
     try {
       var prompt = req.body.prompt; // You can pass the prompt as a JSON object in the request body
       console.log(prompt);
@@ -33,7 +33,16 @@ const openai = new OpenAI({
       res.status(500).json({ error: "An error occurred" });
     }
   });
+// List of tags
+const tags = ["tag1", "tag2", "tag3", "tag4", "tag5", "tag6"];
+app.post("/", (req, res) => {
+  // Generate a random index to select a random tag from the list
+  const randomIndex = Math.floor(Math.random() * tags.length);
+  const randomTag = tags[randomIndex];
 
+  // Send the random tag as the response
+  res.send(randomTag);
+});
   app.get("/", (req, res) => {
     res.send("Hi i am working");
   });
