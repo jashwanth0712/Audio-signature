@@ -1,49 +1,43 @@
 const express = require("express");
+const { OpenAI } = require("openai");
 require("dotenv").config();
-const {  OpenAI } = require("openai");
 
 const app = express();
-
-app.use(express.json());
+const port = process.env.PORT || 3000;
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY// This is also the default, can be omitted
-});;
+    apiKey: process.env.OPENAI_API_KEY,
+  });
 
-app.post("/find-complexity", async (req, res) => {
-  try {
-    const { prompt } = req.body;
-    console.log(prompt)
-    const response = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: `
-              ${prompt}
-      
-              how are you
-              ###
-            `,
-      max_tokens: 64,
-      temperature: 0,
-      top_p: 1.0,
-      frequency_penalty: 0.0,
-      presence_penalty: 0.0,
-      stop: ["\n"],
-    });
+  app.use(express.json());
 
-    return res.status(200).json({
-      success: true,
-      data: response.data.choices[0].text,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      success: false,
-      error: error.response
-        ? error.response.data
-        : "There was an issue on the server",
-    });
-  }
-});
+  app.post("/", async (req, res) => {
+    try {
+      var prompt = req.body.prompt; // You can pass the prompt as a JSON object in the request body
+      console.log(prompt);
+     const rules="ih hrllo gm"
+     prompt=prompt+rules
 
-const port = process.env.PORT || 5000;
+    if (!prompt) {
+        return res.status(400).json({ error: "Prompt is required" });
+      }
 
-app.listen(port, () => console.log(`Server listening on port ${port}`));
+      const completion = await openai.completions.create({
+        model: "gpt-3.5-turbo-instruct",
+        prompt,
+      });
+  
+      res.json(completion);
+    } catch (error) {
+      console.error("Error:", error);
+      res.status(500).json({ error: "An error occurred" });
+    }
+  });
+
+  app.get("/", (req, res) => {
+    res.send("Hi i am working");
+  });
+  
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
