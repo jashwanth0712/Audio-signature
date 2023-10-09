@@ -107,7 +107,3 @@ def response_parser(response):
             no_sign_count += 1
         signatures_list.append((signer_name,status_code))
     return [no_sign_count,signatures_list]
-
-
-        
-get_signature_request("18642c608e525e4152a38bf6b817578540eee98e4c370639cb36b78cc051819b","39c0e06c6320cafaab86c8de6b7653e22e1c64b8")
