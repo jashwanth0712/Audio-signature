@@ -7,16 +7,13 @@ submission for dropbox hackathon
 **1. Download/Clone the repository:**
 
 - Click the "Code" button, and select "Download ZIP" to save the repository to your computer.
-
 - Alternatively, you can clone the repository using the following command:
    ```bash
    git clone https://github.com/jashwanth0712/Audio-signature.git
      ```
 
 **2. Install Required Modules:**
-
 - Open a terminal/command prompt and navigate to the extension folder inside the repository's directory.
-
 - Run the following command to install the required modules:
    ```
    npm install
@@ -28,17 +25,11 @@ submission for dropbox hackathon
 - This will create a `build` folder within the extension folder.
 
 **3. Unpack the Extension:**
-
 - After the installation is complete, you need to unpack the extension into your Chrome browser.
-
 - Open Google Chrome and type `chrome://extensions/` into the address bar.
-
 - Toggle on the "Developer mode" located at the top-right corner of the page.
-
 - Click the "Load unpacked" button.
-
 - Browse to the `build` folder within the downloaded repository and select it.
-
 **4. Enable the Extension:**
 
 - Once you've loaded the extension, it should appear in your Chrome extensions list.
