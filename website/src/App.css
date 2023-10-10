@@ -3,6 +3,13 @@
   flex-direction: column;
   text-align: center;
 }
+.Prompt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
 .listening-animation{
   border-radius: 50%;
   justify-content: center;
@@ -10,6 +17,21 @@
   margin-top: 15vh;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 30px;
   width: 180px;
+}
+.compare-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:space-between;
+  width: 300px;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 32px;
+  height: 70vh;
+  border: 1px #282c34 solid;
+}
+.compare-card p{
+  font-weight: 300;
 }
 .Main-dialouge{
   display: flex;
@@ -87,6 +109,22 @@
   font-size: x-large;
   z-index: 100;
 }
+.random-bars-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.random-bar {
+  width: 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+  background-color: #0074d9; /* Example background color */
+  box-shadow: #5E5DF0 10px 20px 20px -10px;
+
+}
+
 .progress-bar {
   height: 2px;
   background-color: #216f1e; /* Progress bar color */
@@ -399,4 +437,17 @@
   width: fit-content;
   word-break: break-word;
   border: 0;
+}
+.recording-dots {
+  font-size: 24px; /* Adjust the font size as needed */
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 1;
+  }
 }

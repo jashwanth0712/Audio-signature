@@ -128,8 +128,8 @@ fetch('https://dropbox-4zxc4m7upa-el.a.run.app/audio', {
         content: () => qrCodeRef.current,
       });
     return (
-        <div >
-            <h2>Audio Recorder</h2>
+        <div className="Prompt" >
+            <h2>Sign Wave</h2>
            
             <div style={{display:"flex"}}>
             <div className="Main-dialouge">
@@ -226,7 +226,9 @@ fetch('https://dropbox-4zxc4m7upa-el.a.run.app/audio', {
                 ):null
             }
             </div>
+            <div>
             
+            </div>
             </div>
       
            
