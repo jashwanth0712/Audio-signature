@@ -2,6 +2,47 @@
 [![YouTube Video](https://img.youtube.com/vi/w-AHgb_e0kI/0.jpg)](https://www.youtube.com/watch?v=w-AHgb_e0kI)
 # [`website`](https://home-tau-cyan.vercel.app/) [`Devpost`](https://devpost.com/software/signwave) [`Demo`](https://youtu.be/w-AHgb_e0kI)
 submission for dropbox hackathon
+## How to Install 👩‍💻
+
+**1. Download/Clone the repository:**
+
+- Click the "Code" button, and select "Download ZIP" to save the repository to your computer.
+- Alternatively, you can clone the repository using the following command:
+   ```bash
+   git clone https://github.com/jashwanth0712/Audio-signature.git
+     ```
+
+**2. Install Required Modules:**
+- Open a terminal/command prompt and navigate to the extension folder inside the repository's directory.
+- Run the following command to install the required modules:
+   ```
+   npm install
+   ```
+- Run the following command to build the extension:
+   ```
+   npm run build
+   ```
+- This will create a `build` folder within the extension folder.
+
+**3. Unpack the Extension:**
+- After the installation is complete, you need to unpack the extension into your Chrome browser.
+- Open Google Chrome and type `chrome://extensions/` into the address bar.
+- Toggle on the "Developer mode" located at the top-right corner of the page.
+- Click the "Load unpacked" button.
+- Browse to the `build` folder within the downloaded repository and select it.
+**4. Enable the Extension:**
+
+- Once you've loaded the extension, it should appear in your Chrome extensions list.
+
+- Make sure the extension is enabled by toggling the switch next to it.
+
+**5. Start Using the Extension:**
+
+- The Document Signer Extension icon should now be visible in your Chrome toolbar.
+
+- Click on the extension icon to open and start using its features, including the Legal Chatbot, Text Highlighter, and Document Generator.
+
+**Note: If you prefer an alternative download method, you can download the `build` folder directly by downloading from [this link](https://drive.google.com/drive/folders/1Zv9v3hy5dqxLTpGeu6rqZB0kH01LIB24?usp=sharing).**
 
 # How it works
 ![QR](https://github.com/jashwanth0712/Audio-signature/blob/main/website/src/assets/getQr.png?raw=true)
