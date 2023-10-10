@@ -1,17 +1,33 @@
-import { useState, useRef } from "react";
+import { useState,useEffect, useRef } from "react";
 import QRCode from "qrcode.react";
+
 import { useReactToPrint } from 'react-to-print';
+ 
 const AudioRecorder = () => {
     const mimeType = "audio/wav";
     const [qrCodeData, setQrCodeData] = useState(null); // State to hold QR code data
     const qrCodeRef = useRef();
+  const [progressWidth, setProgressWidth] = useState("30%"); // State to control progress bar width
     const [permission, setPermission] = useState(false);
     const [stream, setStream] = useState(null);
     const mediaRecorder = useRef(null);
     const [recordingStatus, setRecordingStatus] = useState("inactive");
     const [audioChunks, setAudioChunks] = useState([]);
     const [audio, setAudio] = useState(null);
-
+    const [params, setParams] = useState({});
+    const [progress,setProgress]=useState(0) 
+    // 0- audio recording
+    // 1- downloading
+    // 2- goining to sign
+    useEffect(() => {
+      // Parse the URL parameters and store them in the 'params' state
+      const searchParams = new URLSearchParams(window.location.search);
+      const paramsObject = {};
+      for (const [key, value] of searchParams) {
+        paramsObject[key] = value;
+      }
+      setParams(paramsObject);
+    }, []);
     const getMicrophonePermission = async () => {
         if ("MediaRecorder" in window) {
             try {
@@ -28,15 +44,14 @@ const AudioRecorder = () => {
             alert("The MediaRecorder API is not supported in your browser.");
         }
     };
-
     const startRecording = async () => {
         setRecordingStatus("recording");
         console.log("recording started");
-        //create new Media recorder instance using the stream
+        // Create a new Media recorder instance using the stream
         const media = new MediaRecorder(stream, { type: mimeType });
-        //set the MediaRecorder instance to the mediaRecorder ref
+        // Set the MediaRecorder instance to the mediaRecorder ref
         mediaRecorder.current = media;
-        //invokes the start method to start the recording process
+        // Invokes the start method to start the recording process
         mediaRecorder.current.start();
         let localAudioChunks = [];
         mediaRecorder.current.ondataavailable = (event) => {
@@ -45,8 +60,12 @@ const AudioRecorder = () => {
             localAudioChunks.push(event.data);
         };
         setAudioChunks(localAudioChunks);
+
     };
+    
     const stopRecording = () => {
+          // Once the recording is stopped, set the progress bar width to 100%
+    setProgressWidth("60%");
         setRecordingStatus("inactive");
         //stops the recording instance
         mediaRecorder.current.stop();
@@ -61,6 +80,7 @@ const AudioRecorder = () => {
             setAudio(audioUrl);
             setAudioChunks([]);
             console.log("stop ran")
+            setProgress(1)
             // Assuming you have audioBlob and mimeType defined
 
 // Assuming you have audioBlob and mimeType defined
@@ -82,7 +102,8 @@ fetch('https://dropbox-4zxc4m7upa-el.a.run.app/audio', {
     // Handle the response from the server
     console.log(data);
     setQrCodeData(data);
-    handlePrint()
+    console.log(qrCodeRef.current)
+
   })
   .catch((error) => {
     console.error('There was a problem with the fetch operation:', error);
@@ -90,33 +111,37 @@ fetch('https://dropbox-4zxc4m7upa-el.a.run.app/audio', {
 
         };
     };
+    const DownloadQR= () => {
+        setProgress(2)
+        setProgressWidth("100%")
+        handlePrint();
+    }
     const handlePrint = useReactToPrint({
         content: () => qrCodeRef.current,
       });
     return (
-        <div>
+        <div >
             <h2>Audio Recorder</h2>
-            <main>
+            <div style={{display:"flex"}}>
+            <div className="Main-dialouge">
+                <div>
+                <div className="progress-bar" style={{ width: progressWidth }}></div>
+                    <h2>Record you signature</h2>
+                </div>
+            {progress==0 ? (
+                    <div>
+
+<main>
                 <div className="audio-controls">
-                {qrCodeData && (
-                    
-            <div className="qr-code-container">
-              <p>QR Code for the recording:</p>
-              <div ref={qrCodeRef}>
-              <QRCode id="qr-code" value={qrCodeData} size={500} />
-              </div>
-              <div>
-      </div>
-            </div>
-          )}
-                    {audio ? (
+     
+                    {/* {audio ? (
                         <div className="audio-container">
                             <audio src={audio} controls ></audio>
                             <a download href={audio}>
                                 Download Recording
                             </a>
                         </div>
-                    ) : null}
+                    ) : null} */}
                     {!permission ? (
                         <button onClick={getMicrophonePermission} type="button">
                             Get Microphone
@@ -134,6 +159,45 @@ fetch('https://dropbox-4zxc4m7upa-el.a.run.app/audio', {
                     ) : null}
                 </div>
             </main>
+                        <div style={{display:"flex"}}>
+                        <p>click on the start button and tell </p>
+                        <p style={{marginLeft:"3px" , background:"#90EE90"  ,paddingRight:"3px",paddingLeft:"3px",borderRadius:"5px"}}> I agree</p></div>
+
+                        
+                    </div>
+                    ) : null}
+            {progress==1 ?
+            (
+                <button onClick={DownloadQR} type="button">
+        Print QR Code
+      </button>
+            ):null}
+            {
+                progress==2 ?(
+                    <div>
+                        <a href={params.id}>Sign</a>
+                    </div>
+                ):null
+            }
+            </div>
+            
+            </div>
+      
+           
+            
+            <div style={{height:"200vh"}}>
+
+            </div>
+            {qrCodeData && (
+                    
+                    <div className="qr-code-container">
+                      <div ref={qrCodeRef}>
+                      <QRCode id="qr-code" value={qrCodeData} size={500} />
+                      </div>
+                      <div>
+              </div>
+                    </div>
+                  )}
         </div>
     );
 };
