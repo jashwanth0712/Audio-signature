@@ -93,11 +93,11 @@ const Comparer = () => {
     {isequal==true && <h1>=</h1>}
     {isequal==false && <h1>≠</h1>}
       <div className="compare-card">
-      <h2>Upload PDF</h2>
+      <h2>Record Audio</h2>
       {audio ? (
                         <div className="audio-container">
                             <audio src={audio} controls ></audio>
-                            <a download href={audio}>
+                            <a class="button-39" download href={audio}>
                                 Download Recording
                             </a>
                         </div>
