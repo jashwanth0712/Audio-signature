@@ -67,3 +67,5 @@ tensorflow
 Keras>=2.3.1
 numpy>=1.18.2
 numba>=0.48
+PyMuPDF==1.23.4
+PyMuPDFb==1.23.3
