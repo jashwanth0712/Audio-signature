@@ -45,18 +45,50 @@ username=os.getenv("DROPBOX_KEY")
 def base_URL():
     return "Hello Dropbox from SignWave~!\n"
 
+@app.post("/tags")
+def tag_parser(prompt: str):
+    """
+    Fetches the prompt from front-end and executes the functions
+    based on the tags returned by gpt_parser
+    
+    tags:
+        - newsig -> request new signature, either from a url or file upload
+        - checksig -> check status of signature request of a document
+        - revunsig -> review unsigned signature requests sent by user
+        - filtdocdate -> filter signed documents by date
+        - rempeep -> remind people to sign a document
+        
+    params: prompt
+    returns: None
+    """
+    # tags = gpt_parser(prompt)
+    tags = []
+    for tag in tags:
+        if tag == "newsig":
+            return "newsig"
+    
+
 @app.get("/signature")
-def get_signature(sign_id: str):
-    res = get_signature_request(username,sign_id)
+def get_signature(token:str, sign_id: str):
+    res = get_signature_request(token,sign_id)
     return res
 
 @app.get("/list_signatures")
 def list_signature():
     return "Hello Dropbox from SignWave~!\n"
 
-@app.get("/verify")
-def verify_sign():
-    return "Hello Dropbox from SignWave~!\n"
+@app.post("/verify")
+def verify_sign(doc: UploadFile = File(...),rec: UploadFile = File(...)):
+        try:
+            contents = doc.file.read()
+            with open(doc.filename, 'wb') as f:
+                f.write(contents)
+            print("Document written succesfully")
+        except Exception:
+            return {"message": "There was an error uploading the file. Please try again"}
+        finally:
+            doc.file.close()
+        
 
 @app.get("/create")
 def create_document(doc_url: str, email: str, name: str):

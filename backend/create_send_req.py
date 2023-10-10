@@ -8,7 +8,7 @@ configuration = Configuration(
     username=os.getenv("DROPBOX_KEY"),
 )
 
-def send_req_sign(doc_url="https://docs.google.com/document/d/1qiSdZ-BR3to6FT0hFuj2W5W4m7VJ0Ayt4o814xMmft0/edit?usp=sharing",email = "sasankmadati@gmai.com",name="Sasank"):
+def send_req_sign(doc_url="https://docs.google.com/document/d/1qiSdZ-BR3to6FT0hFuj2W5W4m7VJ0Ayt4o814xMmft0/edit?usp=sharing",email = "sasankmadati@gmail.com",name="Sasank"):
     with ApiClient(configuration) as api_client:
         signature_request_api = apis.SignatureRequestApi(api_client)
 
@@ -42,6 +42,8 @@ def send_req_sign(doc_url="https://docs.google.com/document/d/1qiSdZ-BR3to6FT0hF
 
         try:
             response = signature_request_api.signature_request_send(data)
+            pprint(response)
             return f"Document created and sent for signature to {name}"
+            
         except ApiException as e:
             return f"Exception when calling Dropbox Sign API: {e}\n" 
