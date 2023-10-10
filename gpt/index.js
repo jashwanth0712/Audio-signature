@@ -12,21 +12,27 @@ const openai = new OpenAI({
 app.use(cors());
   app.use(express.json());
 
-  app.post("/temp", async (req, res) => {
+  app.post("/prompt", async (req, res) => {
     try {
       var prompt = req.body.prompt; // You can pass the prompt as a JSON object in the request body
       console.log(prompt);
-     const rules="ih hrllo gm"
-     prompt=prompt+rules
-
     if (!prompt) {
         return res.status(400).json({ error: "Prompt is required" });
       }
-
-      const completion = await openai.completions.create({
-        model: "gpt-3.5-turbo-instruct",
-        prompt,
-      });
+      const completion = await openai.chat.completions.create({
+        messages: [{
+            role: "system",
+            content: "I want you to generate a json with tag attribute based on the next message, the tag field is an array of strings containing tag names as detailed next, just return a json as an answer which has tag which is an array of strings, Don't output any code, just the json that you deduce from the message, you can use multiple tags that you deduce from the message:" +
+                "tag field has the following tags: Create a new signature->newsig, check if the document is signed or not->checksig,review the unsigned documents->revunsig, get documents based on date range->filtdocdate and remind people for signature->rempeep the tag field should only contain which tag it is, ex tag:[newsig,checksig] etc"
+        }, {role: "user", content: prompt}],
+        model: "gpt-3.5-turbo",
+    }).then((response) => {
+        return JSON.parse(response.choices[0].message.content)
+    });
+      // const completion = await openai.completions.create({
+      //   model: "gpt-3.5-turbo-instruct",
+      //   prompt,
+      // });
   
       res.json(completion);
     } catch (error) {
