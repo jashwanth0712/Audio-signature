@@ -1,7 +1,10 @@
 import { useState,useEffect, useRef } from "react";
 import QRCode from "qrcode.react";
-
+import { Player, Controls } from '@lottiefiles/react-lottie-player';
 import { useReactToPrint } from 'react-to-print';
+import getaccessgif from "../assets/gifs/mute.gif"
+import recordinggif from "../assets/gifs/recording.gif"
+import downloadgif from "../assets/gifs/download.gif"
  
 const AudioRecorder = () => {
     const mimeType = "audio/wav";
@@ -111,6 +114,11 @@ fetch('https://dropbox-4zxc4m7upa-el.a.run.app/audio', {
 
         };
     };
+    const GoBack=()=>{
+        setProgress(progress-1)
+        setProgressWidth("30%")
+
+    }
     const DownloadQR= () => {
         setProgress(2)
         setProgressWidth("100%")
@@ -122,18 +130,49 @@ fetch('https://dropbox-4zxc4m7upa-el.a.run.app/audio', {
     return (
         <div >
             <h2>Audio Recorder</h2>
+           
             <div style={{display:"flex"}}>
             <div className="Main-dialouge">
                 <div>
                 <div className="progress-bar" style={{ width: progressWidth }}></div>
-                    <h2>Record you signature</h2>
+                
+                {!permission ? (
+                    <div>
+                        <h2>Grant Access</h2>
+                        <img src={getaccessgif}></img>
+                        </div>
+                ):null}
+                 {progress==1 ?(
+                    <div>
+                        <h2>Download AudioSign</h2>
+                        <img src={downloadgif}></img>
+
+                        </div>
+                ):null}
+                {progress==2 ?(
+                    <div>
+                        <h2>Complete Signature</h2>
+                        <h1 style={{fontSize:"100px"}}>🥳</h1>
+                        </div>
+                ):null}
+                {progress==0 && permission && recordingStatus === "inactive" ? (
+                    <div>
+                    <h2>Start Recording</h2>
+                    <h1 style={{fontSize:"100px"}}>🙊</h1>
+                        </div>
+                ):null}
+                {recordingStatus === "recording" ? (
+                    <div>
+                        <h2>Recording...</h2>
+                        <img src={recordinggif}></img>
+                        </div>
+                ):null}
                 </div>
             {progress==0 ? (
                     <div>
 
-<main>
-                <div className="audio-controls">
-     
+                <main>
+                <div className="audio-controls"  style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}} >
                     {/* {audio ? (
                         <div className="audio-container">
                             <audio src={audio} controls ></audio>
@@ -143,18 +182,18 @@ fetch('https://dropbox-4zxc4m7upa-el.a.run.app/audio', {
                         </div>
                     ) : null} */}
                     {!permission ? (
-                        <button onClick={getMicrophonePermission} type="button">
-                            Get Microphone
+                        <button onClick={getMicrophonePermission} class="button-34" type="button">
+                            🎙️ Get Microphone
                         </button>
                     ) : null}
                     {permission && recordingStatus === "inactive" ? (
-                        <button onClick={startRecording} type="button">
-                            Start Recording
+                        <button  class="button-4"  onClick={startRecording} type="button">
+                            🙉 Start Recording
                         </button>
                     ) : null}
                     {recordingStatus === "recording" ? (
-                        <button onClick={stopRecording} type="button">
-                            Stop Recording
+                        <button class="button-45"  onClick={stopRecording} type="button">
+                            ✋ Stop Recording
                         </button>
                     ) : null}
                 </div>
@@ -168,14 +207,21 @@ fetch('https://dropbox-4zxc4m7upa-el.a.run.app/audio', {
                     ) : null}
             {progress==1 ?
             (
-                <button onClick={DownloadQR} type="button">
-        Print QR Code
-      </button>
+                <div >
+                    <button className="button-39" onClick={GoBack} type="button">
+                        Back
+                    </button>
+                    <button  className="button-38" onClick={DownloadQR} type="button">
+                        Download 
+                    </button>
+                    </div>
             ):null}
             {
                 progress==2 ?(
-                    <div>
-                        <a href={params.id}>Sign</a>
+                    <div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
+                          
+                        <a className="button-18" href={params.id}>🚀 Sign</a>
+                    
                     </div>
                 ):null
             }
