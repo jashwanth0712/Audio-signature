@@ -153,6 +153,7 @@ fetch('https://dropbox-4zxc4m7upa-el.a.run.app/audio', {
                     <div>
                         <h2>Complete Signature</h2>
                         <h1 style={{fontSize:"100px"}}>🥳</h1>
+                        <h5 >Click Sign to make audio signature</h5>
                         </div>
                 ):null}
                 {progress==0 && permission && recordingStatus === "inactive" ? (
@@ -220,9 +221,7 @@ fetch('https://dropbox-4zxc4m7upa-el.a.run.app/audio', {
                 progress==2 ?(
                     <div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
                           
-                          <a className="button-18" href={params.id} target="_blank" rel="noopener noreferrer">
-  🚀 Sign
-</a>
+                          <a className="button-18" href={params.id} target="_blank" rel="noopener noreferrer">🚀 Sign</a>
 
                     
                     </div>
