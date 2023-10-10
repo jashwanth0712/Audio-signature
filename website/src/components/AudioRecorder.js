@@ -220,7 +220,10 @@ fetch('https://dropbox-4zxc4m7upa-el.a.run.app/audio', {
                 progress==2 ?(
                     <div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
                           
-                        <a className="button-18" href={params.id}>🚀 Sign</a>
+                          <a className="button-18" href={params.id} target="_blank" rel="noopener noreferrer">
+  🚀 Sign
+</a>
+
                     
                     </div>
                 ):null
