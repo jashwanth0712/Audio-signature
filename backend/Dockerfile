@@ -1,11 +1,11 @@
 # Use the official Python image as a parent image
-FROM ubuntu:latest
+FROM ubuntu:22.04
 
 # Set the working directory to /app
 WORKDIR /app
 
 # Install system dependencies
-RUN apt-get update && apt-get -y install libzbar0
+RUN apt-get update && apt-get -y install libzbar0 && apt-get -y ffmpeg
 
 RUN apt -y install python3 && apt install -y python3-pip
 # Copy the current directory contents into the container at /app

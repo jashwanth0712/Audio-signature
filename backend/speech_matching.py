@@ -34,5 +34,3 @@ def voice_match(clip_path_1 : str, clip_path_2 : str):
         return True
     else:
         return False
-    
-voice_match("jashwanth1.wav","jashwanth2.wav")
