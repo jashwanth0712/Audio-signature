@@ -81,13 +81,18 @@ const Comparer = () => {
       <RandomBars/>
 
         }
-        <input
+        <label for="images" class="drop-container" id="dropcontainer">
+  <span class="drop-title">Drop files here</span>
+  or
+  <input type="file" onChange={handleFileChange} id="images" accept=".pdf" required></input>
+</label>
+        {/* <input
         className='button-34'
         style={{width:"100%"}}
           type="file"
           accept=".pdf"
-          onChange={handleFileChange}
-        />
+          
+        /> */}
        
       </div>
     {isequal==true && <h1>=</h1>}

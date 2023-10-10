@@ -6,7 +6,7 @@ import AudioRecorder from './components/AudioRecorder';
 import Comparer from './components/compare';
 function App() {
   return (
-    <div className="App">
+    <div className="App ">
 <Router>
       <Routes>
       <Route path="/" element={ <Prompt/> } />

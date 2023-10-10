@@ -10,6 +10,11 @@
   flex-direction: column;
   text-align: center;
 }
+.background-image {
+  background-image: url('./assets/background.png');
+  background-size: cover; /* You can adjust this property to fit your design */
+  /* Other background properties such as background-repeat, background-position, etc. */
+}
 .listening-animation{
   border-radius: 50%;
   justify-content: center;
@@ -104,7 +109,7 @@
   border-radius: 10px;
   padding: 10px;
   width: 40%;
-  background-color: rgba(211, 211, 211, 0.1);
+  background-color: rgb(211, 211, 211);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
   font-size: x-large;
   z-index: 100;
@@ -179,6 +184,7 @@
 }
 .output-container{
   justify-content: flex-start;
+  background-color: white;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 30px;
   border-radius: 10px;
   height: auto;
@@ -450,4 +456,99 @@
   100% {
     opacity: 1;
   }
+}
+.drop-container {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px dashed #555;
+  color: #444;
+  cursor: pointer;
+  transition: background .2s ease-in-out, border .2s ease-in-out;
+}
+
+.drop-container:hover {
+  background: #eee;
+  border-color: #111;
+}
+
+.drop-container:hover .drop-title {
+  color: #222;
+}
+
+.drop-title {
+  color: #444;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  transition: color .2s ease-in-out;
+}
+.data-insights {
+  display: flex;
+}
+
+.data-item {
+  margin-right: 20px; /* Adjust as needed for the desired margin */
+  text-align: center;
+}
+
+.data-key {
+  font-weight: bold;
+}
+
+.data-value {
+  margin-top: 5px; /* Adjust as needed for spacing between key and value */
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.green {
+  background-color: green;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.red {
+  background-color: red;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.file-item {
+  animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.data-item {
+  animation: fadeIn 0.5s ease-in-out;
 }
