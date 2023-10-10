@@ -45,8 +45,31 @@ username=os.getenv("DROPBOX_KEY")
 def base_URL():
     return "Hello Dropbox from SignWave~!\n"
 
+@app.post("/tags")
+def tag_parser(prompt: str):
+    """
+    Fetches the prompt from front-end and executes the functions
+    based on the tags returned by gpt_parser
+    
+    tags:
+        - newsig -> request new signature, either from a url or file upload
+        - checksig -> check status of signature request of a document
+        - revunsig -> review unsigned signature requests sent by user
+        - filtdocdate -> filter signed documents by date
+        - rempeep -> remind people to sign a document
+        
+    params: prompt
+    returns: None
+    """
+    # tags = gpt_parser(prompt)
+    tags = []
+    for tag in tags:
+        if tag == "newsig":
+            return "newsig"
+    
+
 @app.get("/signature")
-def get_signature(sign_id: str):
+def get_signature(username:str, sign_id: str):
     res = get_signature_request(username,sign_id)
     return res
 
@@ -54,7 +77,7 @@ def get_signature(sign_id: str):
 def list_signature():
     return "Hello Dropbox from SignWave~!\n"
 
-@app.get("/verify")
+@app.post("/verify")
 def verify_sign():
     return "Hello Dropbox from SignWave~!\n"
 
